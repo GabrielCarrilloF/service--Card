@@ -1,0 +1,22 @@
+{
+  "name": "card-service",
+  "version": "1.0.0",
+  "main": "dist/handler.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/handler.ts",
+    "test-sqs": "ts-node src/lambdas/create-request-card-lambda.ts",
+    "package": "npm run build && powershell Compress-Archive -Path dist/* -DestinationPath dist/card-service.zip",
+    "deploy": "cd infra && terraform init && terraform apply -auto-approve"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1480.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.152",
+    "@types/uuid": "^10.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
